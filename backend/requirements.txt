@@ -3,7 +3,6 @@ anyio==4.8.0
 bcrypt==4.2.1
 cffi==1.17.1
 click==8.1.8
--e git+ssh://git@github.com/ramushetty/Code-Editor-with-AI-Debugging.git@64c5596be8cdbe6b5813216e515b5f7ec7fc7f08#egg=collaborative_code_editor&subdirectory=backend
 cryptography==44.0.1
 dnspython==2.7.0
 ecdsa==0.19.0
