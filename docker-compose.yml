@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: tiger
+      POSTGRES_PASSWORD: test_123
+      POSTGRES_DB: collaborative_code_editor
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend # Correct context
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://tiger:test_123@db/collaborative_code_editor
+    volumes:
+      - ./backend/app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  db-data:
