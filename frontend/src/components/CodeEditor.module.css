@@ -1,0 +1,61 @@
+.editorContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .mainArea {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .participants {
+    width: 20%;
+    border-right: 1px solid #ccc;
+    padding: var(--spacing);
+    overflow-y: auto;
+  }
+  
+  .participants h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+  
+  .participantsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .participantItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .participantName {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .editorArea {
+    flex: 1;
+    padding: var(--spacing);
+    overflow: hidden;
+  }
+  

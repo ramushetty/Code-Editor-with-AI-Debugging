@@ -1,0 +1,183 @@
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing);
+    background-color: var(--secondary-color);
+  }
+  
+  .title {
+    margin: 0;
+    color: var(--primary-color);
+  }
+  
+  .navItems {
+    display: flex;
+    gap: var(--spacing);
+  }
+  
+  /* Collaboration button */
+  .collabButton {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .collabButton:hover {
+    background-color: #43A047;
+  }
+  
+  /* Logout button */
+  .logoutButton {
+    padding: 0.5rem 1rem;
+    background-color: #E53935;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .logoutButton:hover {
+    background-color: #D32F2F;
+  }
+  
+  /* Modal overlay */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal content */
+  .modalContent {
+    background-color: #fff;
+    padding: calc(var(--spacing) * 2);
+    border-radius: 12px;
+    width: 600px;
+    max-width: 90%;
+    position: relative;
+  }
+  
+  /* Close button */
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Modal body with two equal partitions */
+  .modalBody {
+    display: flex;
+    gap: var(--spacing);
+    align-items: stretch;
+    min-height: 200px;  /* Set a minimum height to make the divider visible */
+  }
+  
+  /* Left and right partitions */
+  .leftPane,
+  .rightPane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Vertical divider */
+  .divider {
+    width: 1px;
+    background-color: #ccc;
+    align-self: stretch;
+  }
+  
+  /* Headings */
+  .leftPane h2,
+  .rightPane h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+  
+  /* Code container in left pane */
+  .codeContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: var(--spacing) 0;
+  }
+  
+  /* Generated code text */
+  .generatedCode {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Icon button */
+  .iconButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  /* Buttons */
+  .startButton,
+  .joinButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: var(--spacing);
+    transition: background-color 0.2s ease;
+    align-self: center;
+  }
+  
+  .startButton {
+    background-color: #4CAF50;
+  }
+  
+  .startButton:hover {
+    background-color: #43A047;
+  }
+  
+  .joinButton {
+    background-color: #2196F3;
+  }
+  
+  .joinButton:hover {
+    background-color: #1976D2;
+  }
+  
+  /* Input field for joining */
+  .joinInput {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80%;
+    margin-top: var(--spacing);
+  }
+  
+  /* Error message */
+  .modalError {
+    color: red;
+    text-align: center;
+    margin-top: var(--spacing);
+  }
+  
