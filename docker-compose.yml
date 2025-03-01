@@ -1,3 +1,35 @@
+# version: "3.8"
+
+# services:
+#   db:
+#     image: postgres:16-alpine
+#     restart: always
+#     environment:
+#       POSTGRES_USER: tiger
+#       POSTGRES_PASSWORD: test_123
+#       POSTGRES_DB: collaborative_code_editor
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - db-data:/var/lib/postgresql/data
+
+#   backend:
+#     build:
+#       context: ./backend # Correct context
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - db
+#     environment:
+#       DATABASE_URL: postgresql://tiger:test_123@db/collaborative_code_editor
+#     volumes:
+#       - ./backend/app:/app/app
+#     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+# volumes:
+#   db-data:
+
 version: "3.8"
 
 services:
@@ -12,20 +44,53 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tiger -d collaborative_code_editor"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
 
   backend:
     build:
-      context: ./backend # Correct context
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      redis:
+        condition: service_started
+      db:
+        condition: service_healthy 
     environment:
       DATABASE_URL: postgresql://tiger:test_123@db/collaborative_code_editor
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     volumes:
       - ./backend/app:/app/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: http://backend:8000/api/v1 #Important for frontend to talk to backend
+      REACT_APP_WS_URL: ws://backend:8000/api/v1/ws #Important for frontend websocket connection
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public #Volume mount for public
+      - ./frontend/package.json:/app/package.json #Volume mount for package.json
+      - ./frontend/package-lock.json:/app/package-lock.json #Volume mount for package-lock.json
 
 volumes:
   db-data:
