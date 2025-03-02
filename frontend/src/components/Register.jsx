@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './Register.module.css';
+import apiClient from '../api/axiosSetup';
 
 /**
  * Register component provides a registration form with validation.
@@ -32,13 +32,11 @@ const Register = () => {
     }
     
     try {
-      // Replace '/api/register' with your actual backend endpoint
-      await axios.post('/api/register', {
+      await apiClient.post('/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
       });
-      
       // On success, redirect the user to the Login page
       navigate('/login');
     } catch (err) {

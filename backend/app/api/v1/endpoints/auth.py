@@ -28,7 +28,6 @@ def login(user: UserLogin, response: Response, db: Session = Depends(get_db)):
     db_user = authenticate_user(db, user)
     if not db_user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
-    print(db_user.id)
     access_token = create_access_token(data={"sub": str(db_user.id)})
     response.set_cookie(key="access_token", value=access_token, httponly=False, secure=True, samesite="lax")
     return {"access_token": access_token, "token_type": "bearer"}

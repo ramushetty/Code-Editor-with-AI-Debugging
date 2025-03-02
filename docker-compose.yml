@@ -84,7 +84,7 @@ services:
     depends_on:
       - backend
     environment:
-      REACT_APP_API_URL: http://backend:8000/api/v1 #Important for frontend to talk to backend
+      VITE_REACT_APP_API_URL: http://backend:8000/api/v1 #Important for frontend to talk to backend
       REACT_APP_WS_URL: ws://backend:8000/api/v1/ws #Important for frontend websocket connection
     volumes:
       - ./frontend/src:/app/src

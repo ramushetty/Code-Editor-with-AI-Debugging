@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import axios from 'axios';
+import apiClient from '../api/axiosSetup';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
  * On successful authentication, stores JWT in a cookie.
  */
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Login = () => {
     setError('');
     try {
       // Replace '/api/login' with your actual backend endpoint
-      const response = await axios.post('/api/login', { username, password });
+      const response = await apiClient.post('/login', { email, password });
       const token = response.data.token;
       
       // Store JWT in a cookie (expires in 7 days)
@@ -44,12 +44,12 @@ const Login = () => {
       {error && <p className={styles.error}>{error}</p>}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

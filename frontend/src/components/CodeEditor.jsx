@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 import Navbar from './Navbar';
 import styles from './CodeEditor.module.css';
@@ -13,6 +13,33 @@ const CodeEditor = () => {
 def hello():
     print("Hello, World!")
 `);
+
+useEffect(() => {
+  const newSocket = new WebSocket("ws://localhost:8000/api/v1/ws" + "/6TG6CK"); // Replace "myroom" with a dynamic room ID if needed
+
+  newSocket.onopen = () => {
+    console.log('WebSocket connected');
+    setSocket(newSocket);
+  };
+
+  newSocket.onmessage = (event) => {
+    const receivedCode = event.data;
+    setCode(receivedCode); // Update code with received data
+  };
+
+  // newSocket.onclose = () => {
+  //   console.log('WebSocket disconnected');
+  //   setSocket(null);
+  // };
+
+  return () => {
+    if (newSocket) {
+      newSocket.close();
+    }
+  };
+}, []); // Run only once on mount
+//rest of the code
+
 
   const handleEditorChange = (value, event) => {
     setCode(value);
