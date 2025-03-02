@@ -64,23 +64,7 @@ This project is a collaborative code editor with AI debugging capabilities. It's
 * You can connect to the database using a Redis client at `localhost:6379`.
 ### database layout 
 
-+-----------------+       +-----------------+       +-----------------+
-|     users       |       |   code_files    |       |   code_history  |
-+-----------------+       +-----------------+       +-----------------+
-| id (PK)         |<------| user_id (FK)    |<------| code_file_id (FK)|
-| username        |       | id (PK)         |       | id (PK)         |
-| email           |       | filename        |       | content         |
-| hashed_password |       | file_path       |       | updated_at      |
-+-----------------+       +-----------------+       +-----------------+
-        |                         |
-        |                         |
-        v                         v
-+-----------------+       +-----------------+
-|   room_users    |       |     rooms       |
-+-----------------+       +-----------------+
-| room_id (FK)    |<------| id (PK)         |
-| user_id (FK)    |       | room_number     |
-+-----------------+       +-----------------+
+![alt text](image.png)
 ## Future Improvements
 
 * Implement robust user authentication and authorization for WebSockets.
